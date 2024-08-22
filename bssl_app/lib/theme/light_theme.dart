@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 ThemeData lightTheme = ThemeData(
   colorScheme: ColorScheme.light(
     background: Colors.grey.shade200,
+    // background: Colors.grey.shade800,
     primary: Colors.grey.shade800, // For text color (e.g., "Staff Advance Request" text)
     secondary: Colors.white, // For card and background areas
     tertiary: Colors.grey.shade300, // For input fields and borders
