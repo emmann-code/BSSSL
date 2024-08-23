@@ -24,7 +24,9 @@ class _MyDrawerState extends State<MyDrawer> {
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(
-                  "https://via.placeholder.com/150",
+                  "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.manutd.com%2Fen%2Fplayers-and-staff%2Fdetail%2Fkobbie-mainoo&psig="
+                      "AOvVaw0zxiXy4cd-BorxDKkh4zyl&ust=1724459840761000&source=images&cd=vfe&opi=89978449&ved=2ahUKEwiCmJbT74mIAxVezQIHHWdS"
+                      "IWcQjRx6BAgAEBg",
                   fit: BoxFit.cover,
                   width: 90,
                   height: 90,
