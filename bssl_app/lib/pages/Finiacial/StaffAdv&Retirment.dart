@@ -1,6 +1,8 @@
 import 'package:bssl_app/components/my_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../components/my_button.dart';
+import '../../components/my_data_table.dart';
 import '../../components/my_label.dart';
 import '../../components/my_textfieild.dart';
 
@@ -62,24 +64,13 @@ class StaffAdvanceRetirementPage extends StatelessWidget {
               icon: Icon(Icons.attach_file),
               label: Text("Choose File"),
             ),
-            const SizedBox(height: 16),
-            DataTable(
-              columns: [
-                DataColumn(label: Text("S/N")),
-                DataColumn(label: Text("Expense Description")),
-              ],
-              rows: [
-                DataRow(cells: [DataCell(Text('1')), DataCell(Text('Hotel Bills'))]),
-                DataRow(cells: [DataCell(Text('2')), DataCell(Text('Cost of Drugs'))]),
-                DataRow(cells: [DataCell(Text('3')), DataCell(Text('Vehicles Running Expenses'))]),
-                DataRow(cells: [DataCell(Text('4')), DataCell(Text('Air Ticket'))]),
-                DataRow(cells: [DataCell(Text('5')), DataCell(Text('Night Allowances'))]),
-                DataRow(cells: [DataCell(Text('6')), DataCell(Text('Kilometer claim'))]),
-                DataRow(cells: [DataCell(Text('7')), DataCell(Text('Cost of Meal/Snacks'))]),
-                DataRow(cells: [DataCell(Text('8')), DataCell(Text('Taxi Fares'))]),
-                DataRow(cells: [DataCell(Text('9')), DataCell(Text('Others'))]),
-              ],
+            const SizedBox(height: 8),
+            Text(
+              "Only PDF File accepted for upload: (not more than 5mb)",
+              style: TextStyle(color: Colors.red),
             ),
+            const SizedBox(height: 16),
+            MyDatatable(),
             const SizedBox(height: 16),
             CustomLabel(text: "Balance to be Refunded by Staff"),
             const SizedBox(height: 8),
@@ -105,7 +96,7 @@ class StaffAdvanceRetirementPage extends StatelessWidget {
                   onPressed: () {
                     // Save as Draft functionality
                   },
-                  color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.background.withOpacity(0.009),
                 ),
                 CustomButton(
                   text: "Send for Further Processing",

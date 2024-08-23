@@ -106,7 +106,7 @@ class StaffAdvanceRequestPage extends StatelessWidget {
                   onPressed: () {
                     // Save as Draft functionality
                   },
-                  color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.background.withOpacity(0.009),
                 ),
                 CustomButton(
                   text: "Send for further processing",
