@@ -24,7 +24,7 @@ class _MyDrawerState extends State<MyDrawer> {
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(
-                  "https://via.placeholder.com/150",
+                  "https://img.freepik.com/free-photo/view-cartoon-male-chef-with-delicious-3d-pizza_23-2151017583.jpg?t=st=1724622710~exp=1724626310~hmac=d63d346b5e93d6979cd43609045fc96ab492693f6a81ab294226e5be6908b48d&w=740",
                   fit: BoxFit.cover,
                   width: 90,
                   height: 90,
@@ -57,7 +57,8 @@ class _MyDrawerState extends State<MyDrawer> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => StaffAdvanceRequestPage()),
+                    MaterialPageRoute(
+                        builder: (context) => StaffAdvanceRequestPage()),
                   );
                 },
               ),
@@ -66,7 +67,8 @@ class _MyDrawerState extends State<MyDrawer> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => StaffAdvanceRetirementPage()),
+                    MaterialPageRoute(
+                        builder: (context) => StaffAdvanceRetirementPage()),
                   );
                 },
               ),
