@@ -1,3 +1,4 @@
+import 'package:bssl_app/components/my_drawer.dart';
 import 'package:bssl_app/pages/home_page.dart';
 import 'package:bssl_app/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: themeProvider.themeData,
       home: HomePage(),
+      // home: MyDrawer(),
     );
   }
 }
