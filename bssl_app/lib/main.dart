@@ -3,6 +3,7 @@ import 'package:bssl_app/pages/home_page.dart';
 import 'package:bssl_app/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 void main() {
   runApp(
     ChangeNotifierProvider(

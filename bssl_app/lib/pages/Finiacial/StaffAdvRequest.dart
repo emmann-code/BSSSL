@@ -47,6 +47,8 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
               color: Colors.white, borderRadius: BorderRadius.circular(25)),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -64,8 +66,13 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
+<<<<<<< HEAD
                     contentPadding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+=======
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 15),
+>>>>>>> a40cb546ba7102aeaf85fddb617ecde692ea4d01
                   ),
                   items: <String>['Travel', 'Miscellaneous', 'Medical']
                       .map((String value) {
@@ -119,8 +126,13 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
                   icon: Icon(Icons.attach_file),
                   label: Text("Choose File"),
                   style: ElevatedButton.styleFrom(
+<<<<<<< HEAD
                     padding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+=======
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
+>>>>>>> a40cb546ba7102aeaf85fddb617ecde692ea4d01
                     textStyle: const TextStyle(fontSize: 16),
                   ),
                 ),
