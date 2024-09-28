@@ -9,15 +9,14 @@ import '../../components/my_button.dart';
 import '../../components/my_data_table.dart';
 import '../../components/my_label.dart';
 import '../../components/my_textfieild.dart';
+import '../../services/bssl_service.dart';
 
 class StaffAdvanceRetirementPage extends StatefulWidget {
   @override
-  State<StaffAdvanceRetirementPage> createState() =>
-      _StaffAdvanceRetirementPageState();
+  State<StaffAdvanceRetirementPage> createState() => _StaffAdvanceRetirementPageState();
 }
 
-class _StaffAdvanceRetirementPageState
-    extends State<StaffAdvanceRetirementPage> {
+class _StaffAdvanceRetirementPageState extends State<StaffAdvanceRetirementPage> {
   final TextEditingController referenceController = TextEditingController();
 
   final TextEditingController dateController = TextEditingController();
@@ -31,6 +30,14 @@ class _StaffAdvanceRetirementPageState
   final TextEditingController balanceRefundedToStaffController =
       TextEditingController();
 
+      @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getReferenceNumber();
+    viewSavedRecords();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,19 +48,13 @@ class _StaffAdvanceRetirementPageState
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Container(
-<<<<<<< HEAD
-           padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(25)),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-=======
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(25)),
+            color: Colors.white, 
+            borderRadius: BorderRadius.circular(25)
+          ),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
->>>>>>> a40cb546ba7102aeaf85fddb617ecde692ea4d01
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -81,12 +82,8 @@ class _StaffAdvanceRetirementPageState
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                   ),
-<<<<<<< HEAD
-                  items: <String>['Type 1', 'Type 2', 'Type 3'].map((String value) {
-=======
                   items: <String>['Type 1', 'Type 2', 'Type 3']
                       .map((String value) {
->>>>>>> a40cb546ba7102aeaf85fddb617ecde692ea4d01
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),

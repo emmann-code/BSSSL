@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import '../../components/my_button.dart';
 import '../../components/my_label.dart';
 import '../../components/my_textfieild.dart';
+import '../../services/bssl_service.dart';
 
 class StaffAdvanceRequestPage extends StatefulWidget {
   @override
@@ -30,6 +31,13 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
       value = newVal!;
     });
   }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getReferenceNumber();
+    viewSavedRecords();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +50,11 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Container(
-           padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
               color: Colors.white, borderRadius: BorderRadius.circular(25)),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -66,13 +72,8 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-<<<<<<< HEAD
-                    contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
-=======
                     contentPadding: const EdgeInsets.symmetric(
                         horizontal: 12, vertical: 15),
->>>>>>> a40cb546ba7102aeaf85fddb617ecde692ea4d01
                   ),
                   items: <String>['Travel', 'Miscellaneous', 'Medical']
                       .map((String value) {
@@ -126,13 +127,8 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
                   icon: Icon(Icons.attach_file),
                   label: Text("Choose File"),
                   style: ElevatedButton.styleFrom(
-<<<<<<< HEAD
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-=======
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 12),
->>>>>>> a40cb546ba7102aeaf85fddb617ecde692ea4d01
                     textStyle: const TextStyle(fontSize: 16),
                   ),
                 ),
