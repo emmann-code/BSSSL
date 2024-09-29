@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: themeProvider.themeData,
-      home: HomePage(),
-      // home: MyButton(),
+      // home: HomePage(),
+      home: MyButton(),
     );
   }
 }
