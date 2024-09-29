@@ -54,11 +54,8 @@ class _StaffAdvanceRetirementPageState extends State<StaffAdvanceRetirementPage>
             borderRadius: BorderRadius.circular(25)
           ),
           child: Padding(
-<<<<<<< HEAD
-            padding: const EdgeInsets.all(8.0),
-=======
+            // padding: const EdgeInsets.all(8.0),
             padding: const EdgeInsets.symmetric(vertical: 8.0),
->>>>>>> d020a8dbc4a763d9ed57e03c9b6383b00b345d7c
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

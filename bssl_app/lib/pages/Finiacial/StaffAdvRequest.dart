@@ -19,9 +19,7 @@ class StaffAdvanceRequestPage extends StatefulWidget {
 
 class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
   final TextEditingController referenceController = TextEditingController();
-
   final TextEditingController amountController = TextEditingController();
-
   final TextEditingController purposeController = TextEditingController();
 
   bool value = false;
@@ -31,9 +29,9 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
       value = newVal!;
     });
   }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getReferenceNumber();
     viewSavedRecords();
@@ -72,14 +70,8 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-<<<<<<< HEAD
-
                     contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
-=======
-                    contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 15),
->>>>>>> d020a8dbc4a763d9ed57e03c9b6383b00b345d7c
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                   ),
                   items: <String>['Travel', 'Miscellaneous', 'Medical']
                       .map((String value) {
@@ -122,7 +114,7 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
                 const SizedBox(height: 16),
                 CustomLabel(
                     text:
-                        "File/Documentary Reference Providing Additional Background Information"),
+                    "File/Documentary Reference Providing Additional Background Information"),
                 const SizedBox(height: 8),
                 ElevatedButton.icon(
                   onPressed: () {
@@ -177,6 +169,6 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
           ),
         ),
       ),
-    ));
+    );
   }
 }
