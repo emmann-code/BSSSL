@@ -9,15 +9,14 @@ import '../../components/my_button.dart';
 import '../../components/my_data_table.dart';
 import '../../components/my_label.dart';
 import '../../components/my_textfieild.dart';
+import '../../services/bssl_service.dart';
 
 class StaffAdvanceRetirementPage extends StatefulWidget {
   @override
-  State<StaffAdvanceRetirementPage> createState() =>
-      _StaffAdvanceRetirementPageState();
+  State<StaffAdvanceRetirementPage> createState() => _StaffAdvanceRetirementPageState();
 }
 
-class _StaffAdvanceRetirementPageState
-    extends State<StaffAdvanceRetirementPage> {
+class _StaffAdvanceRetirementPageState extends State<StaffAdvanceRetirementPage> {
   final TextEditingController referenceController = TextEditingController();
 
   final TextEditingController dateController = TextEditingController();
@@ -31,6 +30,14 @@ class _StaffAdvanceRetirementPageState
   final TextEditingController balanceRefundedToStaffController =
       TextEditingController();
 
+      @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getReferenceNumber();
+    viewSavedRecords();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,9 +50,15 @@ class _StaffAdvanceRetirementPageState
         child: Container(
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(25)),
+            color: Colors.white, 
+            borderRadius: BorderRadius.circular(25)
+          ),
           child: Padding(
+<<<<<<< HEAD
             padding: const EdgeInsets.all(8.0),
+=======
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+>>>>>>> d020a8dbc4a763d9ed57e03c9b6383b00b345d7c
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
