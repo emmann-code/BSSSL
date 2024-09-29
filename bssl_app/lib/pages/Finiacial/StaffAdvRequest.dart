@@ -66,13 +66,9 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-<<<<<<< HEAD
+
                     contentPadding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
-=======
-                    contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 15),
->>>>>>> a40cb546ba7102aeaf85fddb617ecde692ea4d01
                   ),
                   items: <String>['Travel', 'Miscellaneous', 'Medical']
                       .map((String value) {
@@ -126,13 +122,8 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
                   icon: Icon(Icons.attach_file),
                   label: Text("Choose File"),
                   style: ElevatedButton.styleFrom(
-<<<<<<< HEAD
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-=======
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16, vertical: 12),
->>>>>>> a40cb546ba7102aeaf85fddb617ecde692ea4d01
                     textStyle: const TextStyle(fontSize: 16),
                   ),
                 ),
@@ -149,7 +140,7 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
                 ),
                 const SizedBox(height: 16),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CustomButton(
                       text: "Save as Draft",
@@ -162,7 +153,7 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
                           .withOpacity(0.009),
                     ),
                     CustomButton(
-                      text: "Send for further processing",
+                      text: "Send for further \n  processing",
                       onPressed: () {
                         // Send functionality
                       },
@@ -175,6 +166,6 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
           ),
         ),
       ),
-    );
+    ));
   }
 }

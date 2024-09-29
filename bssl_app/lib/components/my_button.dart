@@ -19,7 +19,7 @@ class CustomButton extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all(color),
       ),
       onPressed: onPressed,
-      child: Text(text),
+      child: Text(text,),
     );
   }
 }
