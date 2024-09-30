@@ -1,8 +1,8 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:bssl_app/api_button.dart';
 import 'package:bssl_app/components/my_drawer.dart';
 import 'package:bssl_app/pages/home_page.dart';
+import 'package:bssl_app/test.dart';
 import 'package:bssl_app/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: themeProvider.themeData,
       // home: HomePage(),
-      home: MyButton(),
+      home: MyApiButton(),
+      // home: TestApi(),
     );
   }
 }
