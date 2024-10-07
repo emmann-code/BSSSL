@@ -1,5 +1,6 @@
 
 import 'package:bssl_app/api_button.dart';
+import 'package:bssl_app/auth/login_or_register.dart';
 import 'package:bssl_app/components/my_drawer.dart';
 import 'package:bssl_app/pages/home_page.dart';
 import 'package:bssl_app/test.dart';
@@ -24,8 +25,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: themeProvider.themeData,
+      home: LoginOrRegister(),
       // home: HomePage(),
-      home: MyApiButton(),
+      // home: MyApiButton(),
       // home: TestApi(),
     );
   }
