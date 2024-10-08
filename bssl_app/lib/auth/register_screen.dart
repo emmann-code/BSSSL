@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/My_textfield.dart';
+import 'auth_service.dart';
 
 
 class Registerscreen extends StatefulWidget {
@@ -12,59 +13,54 @@ class Registerscreen extends StatefulWidget {
 
 class _RegisterscreenState extends State<Registerscreen> {
   final _formKey = GlobalKey<FormState>();
-  final nameController = TextEditingController();
+  final StaffidController = TextEditingController();
 
   final emailController = TextEditingController();
 
-  final phoneController = TextEditingController();
+  final nameController = TextEditingController();
 
   final passwordController = TextEditingController();
 
   final confirmPasswordController = TextEditingController();
 
+  // Initialize AuthService instance
+  AuthService authService = AuthService();
+
   @override
   void dispose() {
     // Dispose of controllers when the widget is disposed
     emailController.dispose();
-    phoneController.dispose();
     nameController.dispose();
+    StaffidController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
     super.dispose();
   }
 
-
-  // Function to handle form submission
-  // void bookAppointment() async {
-  //   if (_formKey.currentState!.validate()) {
-  //     Map<String, dynamic> appointmentData = {
-  //       'firstName': firstNameController.text,
-  //       'lastName': lastNameController.text,
-  //       'email': emailController.text,
-  //       'visiting': visitingController.text,
-  //       'phone': phoneController.text,
-  //       'purpose': purposeController.text,
-  //       'date': dateController.text,
-  //       'time': timeController.text,
-  //       'additionalInfo': additionalInfoController.text,
-  //     };
-  //
-  //     bool success = await apiService.bookAppointment(appointmentData);
-  //
-  //     if (success) {
-  //       // Navigate to success page
-  //       showDialog(
-  //         context: context,
-  //         builder: (context) => const succesfulpagescreen(),
-  //       );
-  //     } else {
-  //       // Show error message
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         SnackBar(content: Text('Failed to book appointment. Please try again.')),
-  //       );
-  //     }
-  //   }
-  // }
+  // Function to create user
+  Future<void> _registerUser() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        final createUserResponse = await authService.createUser(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+          name: nameController.text.trim(),
+          zcopny: 'ZCopny123',
+          copny: 'CopnyABC',
+          staffCode:  StaffidController.text.trim(),
+          pwdExpiry: true,
+        );
+        print(createUserResponse);
+        // Navigate to the home page or show success message
+      } catch (e) {
+        print(e);
+        // Show error message to the user
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: Failed to create user.')),
+        );
+      }
+    }
+  }
 
 
   @override
@@ -94,13 +90,13 @@ class _RegisterscreenState extends State<Registerscreen> {
                 ),
                 SizedBox(height: 20),
                 // Full Name Field
-                MyTextField(controller: nameController, text: 'StaffId', obscureText: false),
+                MyTextField(controller: StaffidController, text: 'StaffId', obscureText: false),
                 SizedBox(height: 20),
                 // Email Field
                 MyTextField(controller: emailController, text: 'Email', obscureText: false),
                 SizedBox(height: 20),
                 // Phone number Field
-                MyTextField(controller: phoneController, text: 'Phone number', obscureText: false),
+                MyTextField(controller: nameController, text: 'Name', obscureText: false),
                 SizedBox(height: 20),
                 // Password Field
                 MyTextField(controller: passwordController, text: 'Password', obscureText: true),
@@ -123,7 +119,7 @@ class _RegisterscreenState extends State<Registerscreen> {
                 SizedBox(height: 20),
                 // Sign Up Button
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: _registerUser,  // Call the register function here
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.primary, // Uses primary color
                     shape: RoundedRectangleBorder(

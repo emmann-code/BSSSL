@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../pages/home_page.dart';
+import 'auth_service.dart';
 import 'forgot_password.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -19,12 +20,42 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final passwordController = TextEditingController();
 
+  // Initialize AuthService instance
+  AuthService authService = AuthService();
+
   @override
   void dispose() {
     // Dispose of controllers when the widget is disposed
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  // Function to log in user
+  Future<void> _loginUser() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        final loginResponse = await authService.loginUser(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+          module: 'ModuleA', // Set your module value here
+          branch: 'BranchA',  // Set your branch value here
+        );
+        // print('Login successful: $loginResponse');
+
+        // If login is successful, navigate to the HomePage
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+      } catch (e) {
+        print(e);
+        // Show error message to the user
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: Failed to log in.')),
+        );
+      }
+    }
   }
 
   String? validateNotEmpty(String? value) {
@@ -121,8 +152,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 // Log In Button
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                        context, MaterialPageRoute(builder: (context) => HomePage()));
+                    _loginUser();  // Call the login function here
+                    // Navigator.pushReplacement(
+                    //     context, MaterialPageRoute(builder: (context) => HomePage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.primary, // Uses primary color for button
