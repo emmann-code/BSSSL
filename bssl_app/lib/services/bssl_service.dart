@@ -1,15 +1,127 @@
+// import 'dart:convert';
+// import 'package:http/http.dart' as http;
+//
+// const String baseUrl = 'https://bsslapidemo.dcontroller.com';
+//
+// // Function to Get Reference Number
+// Future<void> getReferenceNumber() async {
+//   try {
+//     final response = await http.get(
+//       Uri.parse('$baseUrl/api/StaffAdvanceRequests/GetStaffDefault'),
+//     );
+//
+//     if (response.statusCode == 200) {
+//       var data = json.decode(response.body);
+//       print('Reference Number: $data');
+//     } else {
+//       print('Error: Status code ${response.statusCode}');
+//       print('Response: ${response.body}');
+//       throw Exception('Failed to fetch reference number');
+//     }
+//   } catch (e) {
+//     print('Error in getReferenceNumber: $e');
+//     throw Exception('Failed to fetch reference number');
+//   }
+// }
+//
+// // Function to Save Record (Post request)
+// Future<void> saveRecord(Map<String, dynamic> recordData) async {
+//   try {
+//     final response = await http.post(
+//       Uri.parse('$baseUrl/api/StaffAdvanceRequests/SaveRecord'),
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: jsonEncode(recordData),
+//     );
+//
+//     if (response.statusCode == 200) {
+//       print('Record saved successfully');
+//     } else {
+//       print('Error: Status code ${response.statusCode}');
+//       print('Response: ${response.body}');
+//       throw Exception('Failed to save record');
+//     }
+//   } catch (e) {
+//     print('Error in saveRecord: $e');
+//     throw Exception('Failed to save record');
+//   }
+// }
+//
+// // Function to View Saved Records
+// Future<void> viewSavedRecords() async {
+//   try {
+//     final response = await http.get(
+//       Uri.parse('$baseUrl/api/StaffAdvanceRequests/GetListSaveStaffAdvance'),
+//     );
+//
+//     if (response.statusCode == 200) {
+//       // Parse the JSON response if successful
+//       var data = json.decode(response.body);
+//       print('Saved Records: $data');
+//     } else {
+//       print('Error: Status code ${response.statusCode}');
+//       print('Response: ${response.body}');
+//       throw Exception('Failed to fetch saved records');
+//     }
+//   } catch (e) {
+//     print('Error in viewSavedRecords: $e');
+//     throw Exception('Failed to fetch saved records');
+//   }
+// }
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 const String baseUrl = 'https://bsslapidemo.dcontroller.com';
 
+// Retrieve token from SharedPreferences
+Future<String> getAuthToken() async {
+  final prefs = await SharedPreferences.getInstance();
+  String? token = prefs.getString('authToken');
+  if (token == null || token.isEmpty) {
+    throw Exception('No auth token found');
+  }
+  return token;
+}
+
 // Function to Get Reference Number
-Future<void> saveRecord(String token, Map<String, dynamic> recordData) async {
+Future<Map<String, dynamic>?> getReferenceNumber() async {
   try {
+    String token = await getAuthToken();
+
+    final response = await http.get(
+      Uri.parse('$baseUrl/api/StaffAdvanceRequests/GetStaffDefault'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+      print('Reference Number: $data');
+      return data;
+    } else {
+      print('Error: Status code ${response.statusCode}');
+      throw Exception('Failed to fetch reference number');
+    }
+  } catch (e) {
+    print('Error in getReferenceNumber: $e');
+    throw Exception('Failed to fetch reference number');
+  }
+}
+
+// Function to Save Record (Post request)
+Future<void> saveRecord(Map<String, dynamic> recordData) async {
+  try {
+    String token = await getAuthToken();
+
     final response = await http.post(
       Uri.parse('$baseUrl/api/StaffAdvanceRequests/SaveRecord'),
       headers: {
-        'Authorization': 'Bearer $token', // Pass the token in the headers
+        'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       },
       body: jsonEncode(recordData),
@@ -18,8 +130,6 @@ Future<void> saveRecord(String token, Map<String, dynamic> recordData) async {
     if (response.statusCode == 200) {
       print('Record saved successfully');
     } else {
-      print('Error: Status code ${response.statusCode}');
-      print('Response: ${response.body}');
       throw Exception('Failed to save record');
     }
   } catch (e) {
@@ -28,107 +138,83 @@ Future<void> saveRecord(String token, Map<String, dynamic> recordData) async {
   }
 }
 
-
 // Function to View Saved Records
-Future<void> viewSavedRecords(String token) async {
-  // Add query parameters if needed (e.g., 'year' and 'staffCode')
-  final url = Uri.https('bsslapidemo.dcontroller.com',
-      '/api/StaffAdvanceRequests/GetListSaveStaffAdvance', {
-    'year': token, // Adding 'staffCode' as a query parameter
-  });
-
+Future<List<dynamic>> viewSavedRecords() async {
   try {
+    String token = await getAuthToken();
+
     final response = await http.get(
-      url,
+      Uri.parse('$baseUrl/api/StaffAdvanceRequests/GetListSaveStaffAdvance'),
       headers: {
-        'Authorization': 'Bearer $token', // Pass the token in the headers
+        'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       },
     );
 
     if (response.statusCode == 200) {
-      // Parse the JSON response if successful
       var data = json.decode(response.body);
-      print('Saved Records: $data');
+      return data as List<dynamic>;
     } else {
-      print('Error: Status code ${response.statusCode}');
-      print('Response: ${response.body}');
       throw Exception('Failed to fetch saved records');
     }
   } catch (e) {
-    print('Error in viewSavedRecords: $e');
     throw Exception('Failed to fetch saved records');
   }
 }
 
+// Function to Authenticate and retrieve token
+Future<Map<String, dynamic>> authenticate() async {
+  final url = Uri.https('bsslapidemo.dcontroller.com', '/api/Account/Logindetails');
 
+  final body = jsonEncode({
+    "userCode": "Admin",
+    "subsystem": "Unknown",
+    "loginModule": "module001",
+    "loginYear": "2024",
+    "areaOffice": "Lekki",
+    "systemName": "MSI",
+    "systemtype": "c7vfkp",
+    "systemOs": "windows_11",
+    "locationState": "Lagos",
+    "locationAddress": "Lekki",
+    "locationCountry": "Nigeria",
+    "password": "BSSL@TRAINING"
+  });
 
-  Future<Map<String, dynamic>> authenticate() async {
-    final url =
-        Uri.https('bsslapidemo.dcontroller.com', '/api/Account/Logindetails');
+  final response = await http.post(
+    url,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: body,
+  );
 
-    // JSON payload as per the API documentation
-    final body = jsonEncode({
-      "userCode": "Admin",
-      "subsystem": "Unknown",
-      "loginModule": "module001",
-      "loginYear": "2024",
-      "areaOffice": "Lekki",
-      "systemName": "MSI",
-      "systemtype": "c7vfkp",
-      "systemOs": "windows_11",
-      "locationState": "Lagos",
-      "locationAddress": "Lekki",
-      "locationCountry": "Nigeria",
-      "password": "BSSL@TRAINING"
-    });
+  print('Authentication Response: ${response.body}');
+  print('Status Code: ${response.statusCode}');
 
-    // Send POST request to authenticate
-    final response = await http.post(
-      url,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: body,
-    );
+  if (response.statusCode == 200) {
+    final data = jsonDecode(response.body);
+    print('Data: $data');
 
-    // Print the entire response for debugging
-    print('Authentication Response: ${response.body}');
-    print('Status Code: ${response.statusCode}');
-
-    // Check if the authentication is successful
-    if (response.statusCode == 200) {
-      // Extract the bearer token and other details from the response
-      final data = jsonDecode(response.body);
-      // Print the data to see the structure of the response
-      print('Data: $data');
-
-      // Check what key contains the token
-      if (data.containsKey('token')) {
-        print(data['token']);
-        print(data['userCode']);
-        print(data['loginYear']);
-        return {
-          'token': data['token'],
-          'userCode': data['userCode'],
-          'loginYear': data['loginYear']
-        }; // Return a map with multiple parameters
-      } else {
-        throw Exception('Token not found in the response');
-      }
+    if (data.containsKey('token')) {
+      return {
+        'token': data['token'],
+        'userCode': data['userCode'],
+        'loginYear': data['loginYear']
+      };
     } else {
-      throw Exception(
-          'Failed to authenticate. Status code: ${response.statusCode}');
+      throw Exception('Token not found in the response');
     }
+  } else {
+    throw Exception('Failed to authenticate. Status code: ${response.statusCode}');
   }
+}
 
-  // Fetch data using the token and additional details
-Future<void> getReferenceNumber(String token, String year, String staffCode) async {
-  // Add the parameters as query parameters in the URL
-  final url = Uri.https('bsslapidemo.dcontroller.com',
-      '/api/StaffAdvanceRequests/GetStaffDefault', {
-    'year': year,         // Adding 'year' as a query parameter
-    'staffCode': staffCode, // Adding 'staffCode' as a query parameter
+// Function to Fetch data using token and additional details
+Future<void> getReferenceNumberWithParams(String token, String year, String staffCode) async {
+  final url = Uri.https('bsslapidemo.dcontroller.com', '/api/StaffAdvanceRequests/GetStaffDefault', {
+    'year': year,
+    'staffCode': staffCode,
     'refno': ""
   });
 
@@ -137,16 +223,15 @@ Future<void> getReferenceNumber(String token, String year, String staffCode) asy
   final response = await http.get(
     url,
     headers: {
-      'Authorization': 'Bearer $token', // Pass the token in the headers
+      'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',
     },
   );
 
-  // Check if the request is successful
   if (response.statusCode == 200) {
     print('Response body: ${response.body}');
   } else {
     print('Failed to load data. Status code: ${response.statusCode}');
-    print('Response: ${response.body}'); // Print response to check error details
+    print('Response: ${response.body}');
   }
 }

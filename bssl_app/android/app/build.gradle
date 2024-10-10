@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.bssl_app"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 34 // flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

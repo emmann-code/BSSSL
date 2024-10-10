@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import '../../components/my_button.dart';
 import '../../components/my_data_table.dart';
 import '../../components/my_label.dart';
-import '../../components/my_textfieild.dart';
+import '../../components/my_customtextfieild.dart';
 import '../../services/bssl_service.dart';
 
 class StaffAdvanceRetirementPage extends StatefulWidget {
@@ -53,6 +53,7 @@ class _StaffAdvanceRetirementPageState extends State<StaffAdvanceRetirementPage>
             borderRadius: BorderRadius.circular(25)
           ),
           child: Padding(
+            // padding: const EdgeInsets.all(8.0),
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,10 +141,10 @@ class _StaffAdvanceRetirementPageState extends State<StaffAdvanceRetirementPage>
                 ),
                 const SizedBox(height: 16),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CustomButton(
-                      text: "Save as Draft",
+                      text: "Save as draft",
                       onPressed: () {
                         // Save as Draft functionality
                       },
@@ -153,7 +154,7 @@ class _StaffAdvanceRetirementPageState extends State<StaffAdvanceRetirementPage>
                           .withOpacity(0.009),
                     ),
                     CustomButton(
-                      text: "Send for Further Processing",
+                      text: "Send for further \n   processing",
                       onPressed: () {
                         // Send functionality
                       },

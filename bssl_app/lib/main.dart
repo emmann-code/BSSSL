@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:bssl_app/auth/login_or_register.dart';
 import 'package:bssl_app/pages/home_page.dart';
 import 'package:bssl_app/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +23,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: themeProvider.themeData,
-      home: HomePage(),
-      // home: MyButton(),
+      home: LoginOrRegister(), // Choose the appropriate home widget
+      // home: HomePage(),
+      // home: MyApiButton(),
+      // home: TestApi(),
     );
   }
 }

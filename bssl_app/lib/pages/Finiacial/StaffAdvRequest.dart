@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 
 import '../../components/my_button.dart';
 import '../../components/my_label.dart';
-import '../../components/my_textfieild.dart';
+import '../../components/my_customtextfieild.dart';
 import '../../services/bssl_service.dart';
 
 class StaffAdvanceRequestPage extends StatefulWidget {
@@ -19,9 +19,7 @@ class StaffAdvanceRequestPage extends StatefulWidget {
 
 class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
   final TextEditingController referenceController = TextEditingController();
-
   final TextEditingController amountController = TextEditingController();
-
   final TextEditingController purposeController = TextEditingController();
 
   bool value = false;
@@ -31,9 +29,9 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
       value = newVal!;
     });
   }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     // viewSavedRecords();
   }
@@ -71,8 +69,8 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 15),
+                    contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                   ),
                   items: <String>['Travel', 'Miscellaneous', 'Medical']
                       .map((String value) {
@@ -115,7 +113,7 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
                 const SizedBox(height: 16),
                 CustomLabel(
                     text:
-                        "File/Documentary Reference Providing Additional Background Information"),
+                    "File/Documentary Reference Providing Additional Background Information"),
                 const SizedBox(height: 8),
                 ElevatedButton.icon(
                   onPressed: () {
@@ -144,7 +142,7 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
                 ),
                 const SizedBox(height: 16),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CustomButton(
                       text: "Save as Draft",
@@ -157,7 +155,7 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
                           .withOpacity(0.009),
                     ),
                     CustomButton(
-                      text: "Send for further processing",
+                      text: "Send for further \n  processing",
                       onPressed: () {
                         // Send functionality
                       },
