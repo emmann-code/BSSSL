@@ -35,8 +35,7 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getReferenceNumber();
-    viewSavedRecords();
+    // viewSavedRecords();
   }
 
   @override

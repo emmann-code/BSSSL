@@ -34,8 +34,7 @@ class _StaffAdvanceRetirementPageState extends State<StaffAdvanceRetirementPage>
   void initState() {
     // TODO: implement initState
     super.initState();
-    getReferenceNumber();
-    viewSavedRecords();
+    // viewSavedRecords();
   }
 
   @override
