@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import '../../components/my_button.dart';
 import '../../components/my_label.dart';
 import '../../components/my_customtextfieild.dart';
+import '../../drawer_test.dart';
 import '../../services/bssl_service.dart';
 
 class StaffAdvanceRequestPage extends StatefulWidget {
@@ -39,11 +40,6 @@ class _StaffAdvanceRequestPageState extends State<StaffAdvanceRequestPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
-        title: const Text("Staff Advance Request"),
-      ),
-      drawer: MyDrawer(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Container(

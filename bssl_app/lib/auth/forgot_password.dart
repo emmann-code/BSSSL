@@ -1,8 +1,6 @@
-import 'package:bssl_app/auth/login_screen.dart';
-import 'package:bssl_app/auth/register_screen.dart';
+import 'package:bssl_app/pages/DashBoard/dash_board_page.dart';
 import 'package:flutter/material.dart';
 
-import '../pages/home_page.dart';
 import 'login_or_register.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -75,7 +73,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pushReplacement(
-                        context, MaterialPageRoute(builder: (context) => HomePage()));
+                        context, MaterialPageRoute(builder: (context) => DashBoardPage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.primary, // Uses primary color for button

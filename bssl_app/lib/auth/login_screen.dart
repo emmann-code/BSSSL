@@ -1,6 +1,10 @@
+// ignore_for_file: unused_local_variable, prefer_const_constructors
+
+import 'package:bssl_app/pages/DashBoard/dash_board_page.dart';
 import 'package:flutter/material.dart';
 
 import '../pages/home_page.dart';
+import '../services/Dashboard_service.dart';
 import 'auth_service.dart';
 import 'forgot_password.dart';
 
@@ -14,7 +18,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-
 
   final emailController = TextEditingController();
 
@@ -33,29 +36,34 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // Function to log in user
   Future<void> _loginUser() async {
-    if (_formKey.currentState!.validate()) {
-      try {
-        final loginResponse = await authService.loginUser(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim(),
-          module: 'ModuleA', // Set your module value here
-          branch: 'BranchA',  // Set your branch value here
-        );
-        // print('Login successful: $loginResponse');
+    await getDashBoard;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => DashBoardPage()),
+    );
+    // if (_formKey.currentState!.validate()) {
+    //   try {
+    //     final loginResponse = await authService.loginUser(
+    //       email: 'bssl@gmail.com',
+    //       password: 'BSSL@Training',
+    //       module: 'ADMIN', // Set your module value here
+    //       branch: 'BranchA', // Set your branch value here
+    //     );
+    //     // print('Login successful: $loginResponse');
 
-        // If login is successful, navigate to the HomePage
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()),
-        );
-      } catch (e) {
-        print(e);
-        // Show error message to the user
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: Failed to log in.')),
-        );
-      }
-    }
+    //     // If login is successful, navigate to the HomePage
+    //     // Navigator.pushReplacement(
+    //     //   context,
+    //     //   MaterialPageRoute(builder: (context) => HomePage()),
+    //     // );
+    //   } catch (e) {
+    //     print(e);
+    //     // Show error message to the user
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       SnackBar(content: Text('Error: Failed to log in.')),
+    //     );
+    //   }
+    // }
   }
 
   String? validateNotEmpty(String? value) {
@@ -78,7 +86,11 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: 50),
-                Image.asset('assets/bssllogo-preview.png',scale: 1,height: 130,),
+                Image.asset(
+                  'assets/bssllogo-preview.png',
+                  scale: 1,
+                  height: 130,
+                ),
                 Text(
                   "dController ERP SELF SERVICE",
                   style: TextStyle(
@@ -89,7 +101,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 20),
                 Text(
                   "Login",
-                  style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.primary),
                 ),
                 SizedBox(height: 20),
                 // Email Field
@@ -100,17 +113,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Email is required';
-                      }
-                      final emailPattern =
-                          r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
-                      if (!RegExp(emailPattern).hasMatch(value)) {
-                        return 'Enter a valid email address';
-                      }
-                      return null;
-                    },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Email is required';
+                    }
+                    final emailPattern =
+                        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+                    if (!RegExp(emailPattern).hasMatch(value)) {
+                      return 'Enter a valid email address';
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(height: 20),
                 // Password Field
@@ -120,7 +133,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    suffixIcon: Icon(Icons.visibility_off, color: Theme.of(context).colorScheme.onSecondary),
+                    suffixIcon: Icon(Icons.visibility_off,
+                        color: Theme.of(context).colorScheme.onSecondary),
                   ),
                   validator: validateNotEmpty,
                   obscureText: true,
@@ -133,17 +147,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       children: [
                         Checkbox(value: true, onChanged: (value) {}),
-                        Text("Remember me", style: TextStyle(color: Theme.of(context).colorScheme.primary)),
+                        Text("Remember me",
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary)),
                       ],
                     ),
                     TextButton(
                       onPressed: () {
                         Navigator.pushReplacement(
-                            context, MaterialPageRoute(builder: (context) => ForgotPasswordScreen()));
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ForgotPasswordScreen()));
                       },
                       child: Text(
                         "Forgot Password?",
-                        style: TextStyle(color: Theme.of(context).colorScheme.primary), // Uses primary color
+                        style: TextStyle(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primary), // Uses primary color
                       ),
                     ),
                   ],
@@ -152,18 +173,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 // Log In Button
                 ElevatedButton(
                   onPressed: () {
-                    _loginUser();  // Call the login function here
+                    _loginUser(); // Call the login function here
                     // Navigator.pushReplacement(
                     //     context, MaterialPageRoute(builder: (context) => HomePage()));
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary, // Uses primary color for button
+                    backgroundColor: Theme.of(context)
+                        .colorScheme
+                        .primary, // Uses primary color for button
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                     minimumSize: Size(double.infinity, 50),
                   ),
-                  child: Text("Log In", style: TextStyle(color: Theme.of(context).colorScheme.secondary)), // Uses secondary (white)
+                  child: Text("Log In",
+                      style: TextStyle(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .secondary)), // Uses secondary (white)
                 ),
                 SizedBox(height: 10),
                 Row(
@@ -171,7 +198,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Text(
                       "Don't have an account?",
-                      style: TextStyle(color: Theme.of(context).colorScheme.primary), // Uses primary color
+                      style: TextStyle(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primary), // Uses primary color
                     ),
                     const SizedBox(width: 5),
                     GestureDetector(
@@ -179,7 +209,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(
                         "Sign Up",
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary, // Uses primary color
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primary, // Uses primary color
                           fontWeight: FontWeight.bold,
                         ),
                       ),

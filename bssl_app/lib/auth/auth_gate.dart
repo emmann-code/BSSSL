@@ -1,7 +1,6 @@
+import 'package:bssl_app/pages/DashBoard/dash_board_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../pages/home_page.dart';
 import 'login_or_register.dart';
 // import '../services/auth_service.dart';
 class AuthGate extends StatefulWidget {
@@ -39,7 +38,7 @@ class _AuthGateState extends State<AuthGate> {
     }
 
     return Scaffold(
-      body: isAuthenticated ? HomePage() : LoginOrRegister(),
+      body: isAuthenticated ? DashBoardPage() : LoginOrRegister(),
     );
   }
 }

@@ -1,15 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:bssl_app/Utils/file_Picker.dart';
-import 'package:bssl_app/components/my_drawer.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../components/my_button.dart';
 import '../../components/my_data_table.dart';
 import '../../components/my_label.dart';
 import '../../components/my_customtextfieild.dart';
-import '../../services/bssl_service.dart';
 
 class StaffAdvanceRetirementPage extends StatefulWidget {
   @override
@@ -40,10 +37,6 @@ class _StaffAdvanceRetirementPageState extends State<StaffAdvanceRetirementPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Staff Advance Retirement and Reimbursement"),
-      ),
-      drawer: MyDrawer(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Container(

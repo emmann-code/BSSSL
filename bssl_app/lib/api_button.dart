@@ -221,6 +221,8 @@
 // }
 
 import 'dart:convert';
+import 'package:bssl_app/pages/DashBoard/dash_board_service.dart';
+import 'package:bssl_app/services/Dashboard_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -332,7 +334,9 @@ class _MyApiButtonState extends State<MyApiButton> {
       print('User Code: $userCode');
       print('Login Year: $loginYear');
 
-      await getNumber(token, loginYear, userCode);
+      // await getNumber(token, loginYear, userCode);
+      print('Getting Dashboard');
+      await getDashBoard(token);
     } catch (e) {
       print('Error occurred: $e');
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e')));
