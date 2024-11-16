@@ -5,6 +5,8 @@ import 'package:bssl_app/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'api_button.dart';
+
 void main() {
   runApp(
     ChangeNotifierProvider(
@@ -22,9 +24,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: themeProvider.themeData,
-        home: LoginOrRegister(), // Choose the appropriate home widget
+        // home: LoginOrRegister(), // Choose the appropriate home widget
         // home: HomePage(),
-        // home: MyApiButton(),
+        home: MyApiButton(),
         // home: TestApi(),
         // home: DashboardApp()
         );

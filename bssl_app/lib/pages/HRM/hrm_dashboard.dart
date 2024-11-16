@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, avoid_print
+import 'package:bssl_app/pages/HRM/change_of_bank_details.dart';
 import 'package:bssl_app/pages/HRM/leave_roster.dart';
+import 'package:bssl_app/pages/HRM/next_of_kin_details.dart';
 import 'package:flutter/material.dart';
 
 import '../MainLayout.dart';
@@ -24,20 +26,24 @@ class _HrmDashboardState extends State<HrmDashboard> {
                   body: LeaveRoster(),
                 )),
       );
-    } else if (pageName == 'Staff Advance Retirement/Reimbursement') {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //       builder: (context) => MainLayout(
-      //             title: 'Staff Advance Retirement/Reimbursement',
-      //             body: StaffAdvanceRetirementPage(),
-      //           )),
-      // );
-    } else if (pageName == 'Payroll') {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => Financialdescription(item: item)),
-      // );
+    } else if (pageName == 'Next of Kin Details') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MainLayout(
+                  title: 'Next of Kin Details',
+                  body: NextOfKinDetails(),
+                )),
+      );
+    } else if (pageName == 'Change Of Bank Details') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MainLayout(
+                  title: 'Change Of Bank Details',
+                  body: ChangeBankDetails(),
+                )),
+      );
     } else if (pageName == 'Expenditure') {
       // Navigator.push(
       //   context,
@@ -70,11 +76,11 @@ class _HrmDashboardState extends State<HrmDashboard> {
                 return GestureDetector(
                   onTap: () {
                     navigateToPage(item['subMenuName'] ?? 'No Name');
-                    print(item['subMenuName']);
+                    print("item name : ${item['subMenuName']}");
                   },
                   child: Card(
                     margin:
-                        EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+                        EdgeInsets.symmetric(vertical: 4.0, horizontal: 5.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
                     ),
