@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import '../MainLayout.dart';
 import 'StaffAdv&Retirment.dart';
 import 'StaffAdvRequest.dart';
+import 'capital_requisition.dart';
+import 'expenditure_memo_initialization.dart';
+import 'staff_request_inquiry.dart';
+import 'update_attachement.dart';
 
 class FinancialDashboard extends StatefulWidget {
   final String category;
@@ -27,7 +31,43 @@ class _FinancialDashboardState extends State<FinancialDashboard> {
                   body: StaffAdvanceRequestPage(),
                 )),
       );
-    } else if (pageName == 'Staff Advance Retirement/Reimbursement') {
+    } else if (pageName == 'Capital/Purchase Requisition (Online)') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MainLayout(
+                  title: 'Capital/Purchase Requisition (Online)',
+                  body: CapitalrequistionPage(),
+                )),
+      );
+    } else if (pageName == 'Staff Request Inquiry') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MainLayout(
+                  title: 'Staff Request Inquiry',
+                  body: StaffrequestinquiryPage(),
+                )),
+      );
+    } else if (pageName == 'Expenditure Initialization Memo') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MainLayout(
+                  title: 'Expenditure Initialization Memo',
+                  body: ExpenditureInitializationMemo(),
+                )),
+      );
+    } else if (pageName == 'Update Attachment') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MainLayout(
+                  title: 'Update Attachment',
+                  body: UpdateattachmentPage(),
+                )),
+      );
+    } else {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -36,19 +76,6 @@ class _FinancialDashboardState extends State<FinancialDashboard> {
                   body: StaffAdvanceRetirementPage(),
                 )),
       );
-    } else if (pageName == 'Payroll') {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => Financialdescription(item: item)),
-      // );
-    } else if (pageName == 'Expenditure') {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => ExpenditurePage()),
-      // );
-    } else {
-      // Fallback for unrecognized pages
-      print('No page found for $pageName');
     }
   }
 
@@ -73,11 +100,11 @@ class _FinancialDashboardState extends State<FinancialDashboard> {
                 return GestureDetector(
                   onTap: () {
                     navigateToPage(item['subMenuName'] ?? 'No Name');
-                    print(item['subMenuName']);
+                    print('page name is : ${item['subMenuName']}');
                   },
                   child: Card(
                     margin:
-                        EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+                        EdgeInsets.symmetric(vertical: 4.0, horizontal: 5.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
                     ),
