@@ -1,4 +1,5 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, avoid_print
+import 'package:bssl_app/pages/HRM/leave_roster.dart';
 import 'package:flutter/material.dart';
 
 import '../MainLayout.dart';
@@ -13,6 +14,41 @@ class HrmDashboard extends StatefulWidget {
 }
 
 class _HrmDashboardState extends State<HrmDashboard> {
+  void navigateToPage(String pageName) {
+    if (pageName == 'Leave Roster') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MainLayout(
+                  title: 'Leave Roster',
+                  body: LeaveRoster(),
+                )),
+      );
+    } else if (pageName == 'Staff Advance Retirement/Reimbursement') {
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) => MainLayout(
+      //             title: 'Staff Advance Retirement/Reimbursement',
+      //             body: StaffAdvanceRetirementPage(),
+      //           )),
+      // );
+    } else if (pageName == 'Payroll') {
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => Financialdescription(item: item)),
+      // );
+    } else if (pageName == 'Expenditure') {
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => ExpenditurePage()),
+      // );
+    } else {
+      // Fallback for unrecognized pages
+      print('No page found for $pageName');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MainLayout(
@@ -33,8 +69,8 @@ class _HrmDashboardState extends State<HrmDashboard> {
                 var item = widget.items[index];
                 return GestureDetector(
                   onTap: () {
-                    // Handle item tap (e.g., show details)
-                    print('Selected: ${item['subMenuName']}');
+                    navigateToPage(item['subMenuName'] ?? 'No Name');
+                    print(item['subMenuName']);
                   },
                   child: Card(
                     margin:
