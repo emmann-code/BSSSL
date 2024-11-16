@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: themeProvider.themeData,
-      home: LoginOrRegister(), // Choose the appropriate home widget
-      // home: HomePage(),
+      // home: LoginOrRegister(), // Choose the appropriate home widget
+      home: HomePage(),
       // home: MyApiButton(),
       // home: TestApi(),
     );

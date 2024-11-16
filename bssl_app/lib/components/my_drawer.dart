@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import '../pages/Finiacial/CapitalRequistion.dart';
+import '../pages/Finiacial/Expenditurememo.dart';
 import '../pages/Finiacial/StaffAdv&Retirment.dart';
-import '../pages/Finiacial/StaffAdvRequest.dart'; // Import the StaffAdvanceRetirementPage
+import '../pages/Finiacial/StaffAdvRequest.dart';
+import '../pages/Finiacial/StaffRequestInquiry.dart';
+import '../pages/Finiacial/UpdateAttachment.dart'; // Import the StaffAdvanceRetirementPage
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -44,7 +48,7 @@ class _MyDrawerState extends State<MyDrawer> {
             onTap: () {},
           ),
           ExpansionTile(
-            title: const Text('Financial Workflow Process Setup'),
+            title: const Text('Financial'),
             initiallyExpanded: _expanded,
             onExpansionChanged: (bool expanded) {
               setState(() {
@@ -53,12 +57,12 @@ class _MyDrawerState extends State<MyDrawer> {
             },
             children: [
               ListTile(
-                title: const Text('Staff Advance Request'),
+                title: const Text('Expenditure Initialization Memo'),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => StaffAdvanceRequestPage()),
+                        builder: (context) => ExpenditurememoPage()),
                   );
                 },
               ),
@@ -72,10 +76,93 @@ class _MyDrawerState extends State<MyDrawer> {
                   );
                 },
               ),
+              ListTile(
+                title: const Text('Staff Request Inquiry'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => StaffrequestinquiryPage()),
+                  );
+                },
+              ),
+              ListTile(
+                title: const Text('Update Attachment'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => UpdateattachmentPage()),
+                  );
+                },
+              ),
+              ListTile(
+                title: const Text('Staff Advance Request'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => StaffAdvanceRequestPage()),
+                  );
+                },
+              ),
+              ListTile(
+                title: const Text('Capital/Purchase Requisition(Online)'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CapitalrequistionPage()),
+                  );
+                },
+              ),
+            ],
+          ),
+          ExpansionTile(
+            title: const Text('HRM'),
+            initiallyExpanded: _expanded,
+            onExpansionChanged: (bool expanded) {
+              setState(() {
+                _expanded = expanded;
+              });
+            },
+            children: [
+              ListTile(
+                title: const Text('Staff Development Appraisal'),
+                onTap: () {},
+              ),
+              ListTile(
+                title: const Text('Leave Application'),
+                onTap: () {},
+              ),
+              ListTile(
+                title: const Text('Change Of Bank Details'),
+                onTap: () {},
+              ),
+              ListTile(
+                title: const Text('Next of Kin Details'),
+                onTap: () {},
+              ),
+              ListTile(
+                title: const Text('Leave Roster'),
+                onTap: () {},
+              ),
+              ListTile(
+                title: const Text('Staff Request Inquiry HRM '),
+                onTap: () {},
+              ),
+              ListTile(
+                title: const Text('Approval Process Change'),
+                onTap: () {},
+              ),
             ],
           ),
           ListTile(
-            title: const Text('HRM Workflow Process Setup'),
+            title: const Text('FINANCIAL WORKFLOW PROCESS SETUP'),
+            onTap: () {},
+          ),
+          ListTile(
+            title: const Text('HRM WORKFLOW PROCESS SETUP'),
             onTap: () {},
           ),
           ListTile(

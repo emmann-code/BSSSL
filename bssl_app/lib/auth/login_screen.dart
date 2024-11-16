@@ -38,8 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
         final loginResponse = await authService.loginUser(
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
-          module: 'ModuleA', // Set your module value here
-          branch: 'BranchA',  // Set your branch value here
+          module: 'ModuleA',
+          branch: 'BranchA',
         );
         // print('Login successful: $loginResponse');
 
