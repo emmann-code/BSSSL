@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String baseUrl = 'https://bsslapidemo.dcontroller.com';
 
+// SERVICE CLASS FOR STAFF ADVANCE REQUEST
 // Retrieve token from SharedPreferences
 Future<String> getAuthToken() async {
   final prefs = await SharedPreferences.getInstance();
@@ -73,6 +74,108 @@ Future<List<dynamic>> viewSavedRecords() async {
 
     final response = await http.get(
       Uri.parse('$baseUrl/api/StaffAdvanceRequests/GetListSaveStaffAdvance'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+      return data as List<dynamic>;
+    } else {
+      throw Exception('Failed to fetch saved records');
+    }
+  } catch (e) {
+    throw Exception('Failed to fetch saved records');
+  }
+}
+
+// SERVICE CLASS FOR STAFF ADVANCE REQUEST AND REIMBURSEMENT
+// Function to get reference number
+ Future<Map<String, dynamic>?> gETrEFRENCEnUMBER() async {
+  try{
+    String token = await getAuthToken();
+
+    final response = await http.get(
+      Uri.parse('$baseUrl/api/ExpenseStatements/NewRecord'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+      print('Reference Number: $data');
+      return data;
+    } else {
+      print('Error: Status code ${response.statusCode}');
+      throw Exception('Failed to fetch reference number');
+    }
+  } catch (e) {
+    print('Error in getReferenceNumber: $e');
+    throw Exception('Failed to fetch reference number');
+  }
+}
+
+// Function to Save Record (Post request)
+Future<void> saveRECORD(Map<String, dynamic> recordData) async {
+  try {
+    String token = await getAuthToken();
+
+    final response = await http.post(
+      Uri.parse('$baseUrl/api//ExpenseStatements/SaveRecord'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(recordData),
+    );
+
+    if (response.statusCode == 200) {
+      print('Record saved successfully');
+    } else {
+      throw Exception('Failed to save record');
+    }
+  } catch (e) {
+    print('Error in saveRecord: $e');
+    throw Exception('Failed to save record data');
+  }
+}
+
+// Function to get Save Advance
+Future<List<dynamic>> viewSavedAdvances() async {
+  try {
+    String token = await getAuthToken();
+
+    final response = await http.get(
+      Uri.parse('$baseUrl/api/ExpenseStatements/GetSaveExpenapi/api/'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      // Decode the JSON response
+      var data = json.decode(response.body);
+      return data as List<dynamic>;
+    } else {
+      throw Exception('Failed to fetch saved advances');
+    }
+  } catch (e) {
+    throw Exception('Failed to fetch saved advances: $e');
+  }
+}
+
+
+// Function to get Saved Records
+Future<List<dynamic>> vIEWsAVEDrECORDS() async {
+  try {
+    String token = await getAuthToken();
+
+    final response = await http.get(
+      Uri.parse('$baseUrl/api//ExpenseStatements/GetSaveListExpen'),
       headers: {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
