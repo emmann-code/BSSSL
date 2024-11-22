@@ -28,8 +28,6 @@ class MyApp extends StatelessWidget {
         // home: LoginOrRegister(), // Choose the appropriate home widget
         // home: HomePage(),
         home: MyApiButton(),
-        // home: TestApi(),
-        home: MyApiButton(),
         // home: DashboardApp()
         );
   }
