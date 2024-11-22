@@ -24,9 +24,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: themeProvider.themeData,
-        home: LoginOrRegister(), // Choose the appropriate home widget
+        // home: LoginOrRegister(), // Choose the appropriate home widget
         // home: HomePage(),
-        // home: MyApiButton(),
+        home: MyApiButton(),
         // home: TestApi(),
         // home: DashboardApp()
         );

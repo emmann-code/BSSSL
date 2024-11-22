@@ -1,8 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'package:bssl_app/services/Dashboard_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'services/Hrm_services.dart';
 
 class MyApiButton extends StatefulWidget {
   const MyApiButton({super.key});
@@ -36,11 +40,15 @@ class _MyApiButtonState extends State<MyApiButton> {
 
     print('Request Body: $body');
 
-    final response = await http.post(
+    final response = await http
+        .post(
       url,
       headers: {'Content-Type': 'application/json'},
       body: body,
-    );
+    )
+        .timeout(Duration(seconds: 10), onTimeout: () {
+      throw Exception('Request timed out.');
+    });
 
     print('Authentication Response: ${response.body}');
     print('Status Code: ${response.statusCode}');
@@ -114,7 +122,20 @@ class _MyApiButtonState extends State<MyApiButton> {
 
       // await getNumber(token, loginYear, userCode);
       print('Getting test');
-      await test(token);
+      // await GetStaffRefNo(token);
+      // await GetStaff(token);
+      // await GetStaffList(token);
+      // GetLeaveRosterDetails(token);
+      // GetRosterDateChange(token);
+      // GetleaveRecord(token);
+      // GetleaveNewRecord(token);
+      // GetleaveType(token);
+      // GetProcessType(token);
+      // GetCountryList(token);
+      // GetStateList(token);
+      // GetCityList(token);
+      // GetLeaveTypeBal(token);
+      // GetLeaveChange(token);
     } catch (e) {
       print('Error occurred: $e');
       ScaffoldMessenger.of(context)
@@ -136,48 +157,50 @@ class _MyApiButtonState extends State<MyApiButton> {
 // 10604
 // 10398
 
-  Future<dynamic> test(String token) async {
-    final url = Uri.https(
-      'bsslapidemo.dcontroller.com',
-      '/api/ChangeOfBankDetails/BankDetailsList',
-      {'staffid': '10604'},
-    );
+  // Future<dynamic> test(String token) async {
+  //   final url = Uri.https(
+  //     'bsslapidemo.dcontroller.com',
+  //     '/api/StaffAdvanceRequests/GetStaffDefault',
+  //     {
+  //       'staffcode': "9701",
+  //     },
+  //   );
 
-    print('Request URL: $url');
+  //   print('Request URL: $url');
 
-    try {
-      final response = await http.get(
-        url,
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-      );
+  //   try {
+  //     final response = await http.get(
+  //       url,
+  //       headers: {
+  //         'Authorization': 'Bearer $token',
+  //         'Content-Type': 'application/json',
+  //       },
+  //     );
 
-      print('Response Status Code: ${response.statusCode}');
+  //     print('Response Status Code: ${response.statusCode}');
 
-      if (response.statusCode == 200) {
-        print('Response body: ${response.body}');
-        final decoded = jsonDecode(response.body);
+  //     if (response.statusCode == 200) {
+  //       print('Response body: ${response.body}');
+  //       final decoded = jsonDecode(response.body);
 
-        if (decoded is Map<String, dynamic>) {
-          return decoded;
-        } else if (decoded is List) {
-          return decoded;
-        } else {
-          print('Unexpected response format.');
-          return null;
-        }
-      } else {
-        print('Failed to load data. Status code: ${response.statusCode}');
-        print('Response: ${response.body}');
-        return null;
-      }
-    } catch (e) {
-      print('An error occurred: $e');
-      return null;
-    }
-  }
+  //       if (decoded is Map<String, dynamic>) {
+  //         return decoded;
+  //       } else if (decoded is List) {
+  //         return decoded;
+  //       } else {
+  //         print('Unexpected response format.');
+  //         return null;
+  //       }
+  //     } else {
+  //       print('Failed to load data. Status code: ${response.statusCode}');
+  //       print('Response: ${response.body}');
+  //       return null;
+  //     }
+  //   } catch (e) {
+  //     print('An error occurred: $e');
+  //     return null;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

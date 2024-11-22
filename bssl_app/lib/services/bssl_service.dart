@@ -19,9 +19,21 @@ Future<String> getAuthToken() async {
 Future<Map<String, dynamic>?> getReferenceNumber() async {
   try {
     String token = await getAuthToken();
+    print('Entering the second getref');
+    viewSavedRecords();
+    print('Exiting the second getref');
+    final url = Uri.https(
+      'bsslapidemo.dcontroller.com',
+      '/api/StaffAdvanceRequests/GetStaffDefault',
+      {
+        'staffcode': "11110",
+        'refno': "11110",
+        'acyear': "2020",
+      },
+    );
 
     final response = await http.get(
-      Uri.parse('$baseUrl/api/StaffAdvanceRequests/GetStaffDefault'),
+      url,
       headers: {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
@@ -47,18 +59,51 @@ Future<void> saveRecord(Map<String, dynamic> recordData) async {
   try {
     String token = await getAuthToken();
 
-    final response = await http.post(
-      Uri.parse('$baseUrl/api/StaffAdvanceRequests/SaveRecord'),
+    final url = Uri.https(
+      'bsslapidemo.dcontroller.com',
+      '/api/StaffAdvanceRequests/SaveRecord',
+      {
+        "referenceNo": "string",
+        "staffId": "string",
+        "staffName": "string",
+        "department": "string",
+        "advanceCode": "string",
+        "date": "2024-11-18T09:14:10.216Z",
+        "amount": 0,
+        "description": "string",
+        "destination": "string",
+        "purposeOfJourney": "string",
+        "purposeOfAdvance": "string",
+        "departureDate": "2024-11-18T09:14:10.216Z",
+        "arrivalDate": "2024-11-18T09:14:10.216Z",
+        "duration": "string",
+        "travelAdvance": true,
+        "recordExist": 0,
+        "officecode": "string",
+        "companyCode": "string",
+        "fileName": "string",
+        "fileFullPath": "string",
+        "sentToNextProceess": "string",
+        "returnToPreviouseProcess": "string",
+        "returnReason": "string",
+        "quaratined": "string",
+        "retired": "string"
+      },
+    );
+
+    final response = await http.get(
+      url,
       headers: {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       },
-      body: jsonEncode(recordData),
     );
 
     if (response.statusCode == 200) {
       print('Record saved successfully');
     } else {
+      print('Failed with status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
       throw Exception('Failed to save record');
     }
   } catch (e) {
@@ -72,8 +117,16 @@ Future<List<dynamic>> viewSavedRecords() async {
   try {
     String token = await getAuthToken();
 
+    final url = Uri.https(
+      'bsslapidemo.dcontroller.com',
+      '/api/StaffAdvanceRequests/GetStaffDefault',
+      {
+        'staffcode': "11110",
+      },
+    );
+
     final response = await http.get(
-      Uri.parse('$baseUrl/api/StaffAdvanceRequests/GetListSaveStaffAdvance'),
+      url,
       headers: {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
@@ -82,6 +135,7 @@ Future<List<dynamic>> viewSavedRecords() async {
 
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
+      print(data);
       return data as List<dynamic>;
     } else {
       throw Exception('Failed to fetch saved records');
@@ -93,8 +147,8 @@ Future<List<dynamic>> viewSavedRecords() async {
 
 // SERVICE CLASS FOR STAFF ADVANCE REQUEST AND REIMBURSEMENT
 // Function to get reference number
- Future<Map<String, dynamic>?> gETrEFRENCEnUMBER() async {
-  try{
+Future<Map<String, dynamic>?> gETrEFRENCEnUMBER() async {
+  try {
     String token = await getAuthToken();
 
     final response = await http.get(
@@ -168,7 +222,6 @@ Future<List<dynamic>> viewSavedAdvances() async {
   }
 }
 
-
 // Function to get Saved Records
 Future<List<dynamic>> vIEWsAVEDrECORDS() async {
   try {
@@ -195,7 +248,8 @@ Future<List<dynamic>> vIEWsAVEDrECORDS() async {
 
 // Function to Authenticate and retrieve token
 Future<Map<String, dynamic>> authenticate() async {
-  final url = Uri.https('bsslapidemo.dcontroller.com', '/api/Account/Logindetails');
+  final url =
+      Uri.https('bsslapidemo.dcontroller.com', '/api/Account/Logindetails');
 
   final body = jsonEncode({
     "userCode": "Admin",
@@ -237,17 +291,18 @@ Future<Map<String, dynamic>> authenticate() async {
       throw Exception('Token not found in the response');
     }
   } else {
-    throw Exception('Failed to authenticate. Status code: ${response.statusCode}');
+    throw Exception(
+        'Failed to authenticate. Status code: ${response.statusCode}');
   }
 }
 
 // Function to Fetch data using token and additional details
-Future<void> getReferenceNumberWithParams(String token, String year, String staffCode) async {
-  final url = Uri.https('bsslapidemo.dcontroller.com', '/api/StaffAdvanceRequests/GetStaffDefault', {
-    'year': year,
-    'staffCode': staffCode,
-    'refno': ""
-  });
+Future<void> getReferenceNumberWithParams(
+    String token, String year, String staffCode) async {
+  final url = Uri.https(
+      'bsslapidemo.dcontroller.com',
+      '/api/StaffAdvanceRequests/GetStaffDefault',
+      {'year': year, 'staffCode': staffCode, 'refno': ""});
 
   print('Request URL: $url');
 
