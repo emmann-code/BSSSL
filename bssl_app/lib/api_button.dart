@@ -2,10 +2,10 @@
 
 import 'dart:convert';
 import 'package:bssl_app/services/Dashboard_service.dart';
+import 'package:bssl_app/services/Finiacial_services.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'services/Hrm_services.dart';
 
 class MyApiButton extends StatefulWidget {
@@ -136,6 +136,15 @@ class _MyApiButtonState extends State<MyApiButton> {
       // GetCityList(token);
       // GetLeaveTypeBal(token);
       // GetLeaveChange(token);
+      // await getreferencenumber(token);
+      // await GetSavedExpenses(token);
+      // await GetSavedExpensesList(token);
+      // await SaveStaffReimbusRecord(token);
+      // await GetSingleSavedRecords(token);
+      // await GetListSavedRecords(token);
+      // await GetChartOfAccount(token);
+      // await GetCompanyInfo(token);
+      await SaveStaffAdvancedRecord(token);
     } catch (e) {
       print('Error occurred: $e');
       ScaffoldMessenger.of(context)
